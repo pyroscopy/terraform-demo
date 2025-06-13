@@ -98,7 +98,10 @@ resource "aws_s3_bucket" "my_bucket" {
 terraform init
 terraform plan
 terraform apply
+terraform apply -auto-approve
+terraform plan -destroy
 terraform destroy
+terraform destroy -target
 ```
 
 ## 8. 모듈화 실습
