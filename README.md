@@ -39,13 +39,21 @@
 
 ### 설치
 ```bash
-# Mac
-brew install terraform
+# Ubuntu Linux 기준
+# 1. HashiCorp GPG 키 추가
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
-# Ubuntu
-sudo apt-get install terraform
+# 2. HashiCorp APT 저장소 등록
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list
 
-# 버전 확인
+# 3. 패키지 목록 업데이트
+sudo apt update
+
+# 4. Terraform 설치
+sudo apt install terraform
+
+# 5. 설치 확인
 terraform -version
 ```
 
@@ -111,7 +119,11 @@ terraform destroy -target
 terraform-demo/
 ├── main.tf
 ├── modules/
-│   └── ec2/
+│   ├── ec2/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── s3/
 │       ├── main.tf
 │       ├── variables.tf
 │       └── outputs.tf
@@ -161,6 +173,7 @@ terraform apply
 | 핵심 개념 | 설명 |
 |----------|------|
 | init | 초기화 (모듈, provider 다운로드) |
+| plan | 실행 계획 확인 |
 | apply | 선언한 인프라 생성 |
 | destroy | 리소스 정리 |
 | 모듈 | 재사용 가능한 코드 단위, 협업 및 확장성 강화 |
