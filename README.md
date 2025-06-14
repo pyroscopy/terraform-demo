@@ -72,6 +72,7 @@ terraform -version
 terraform init       # 초기화
 terraform plan       # 실행 계획 미리보기
 terraform apply      # 인프라 생성
+terraform show       # 현재 terraform 상태 확인
 terraform destroy    # 인프라 제거
 ```
 
